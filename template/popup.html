@@ -1,4 +1,18 @@
-<form action="/contact/" method="post">{% csrf_token %}
-{{ form.as_p }}
+<form action="../popup/" method="post">{% csrf_token %}
+<table>
+<tr>
+<td>Titre</td>
+<td>{{ form.Title }}</td>
+</tr><tr>
+<td>Description</td>
+<td>{{ form.Description }}</td>
+</tr><tr>
+<td>Description</td>
+<td>{{ form.Url }}</td>
+</tr><tr>
+<td>Private</td>
+<td>{{ form.Private }}</td>
+</tr>
+</table>
 <input type="submit" value="Submit" />
 </form>
