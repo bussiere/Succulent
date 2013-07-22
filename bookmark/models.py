@@ -12,7 +12,7 @@ class Bookmark(models.Model):
     
     
 class Url(models.Model):
-    url = models.CharField(max_length=1024)
+    url = models.CharField(max_length=5024)
 
 
 
