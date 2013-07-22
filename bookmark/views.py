@@ -3,7 +3,9 @@ from django.template import RequestContext, loader
 from bookmark.form import BookmarkForm
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the poll index.")
+    template = loader.get_template('index.html')
+    context = RequestContext(request,{})
+    return HttpResponse(template.render(context))
 
 
 def popup(request):
