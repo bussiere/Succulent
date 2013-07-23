@@ -3,7 +3,7 @@ from django.template import RequestContext, loader
 from bookmark.form import BookmarkForm
 import urllib2
 from BeautifulSoup import BeautifulSoup
-from Script import savebookmark
+from Script import savebookmark, getbookmark
 
 def index(request):
     template = loader.get_template('index.html')
@@ -18,6 +18,7 @@ def popup(request):
         url = request.GET['url']
     soup = BeautifulSoup(urllib2.urlopen(url))
     title = soup.title.string
+    tag = getbookmark(url)
     if request.method == 'POST': # If the form has been submitted...
         form = BookmarkForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
