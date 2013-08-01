@@ -25,7 +25,9 @@ def savebookmark(TitleF,UrlF,DescriptionF,TagF,PrivateF):
     PrivateB.save()
     try :
         b2 = Bookmark.objects.get(url=UrlB)
-        b2(title=TitleB,url=UrlB,description=DescriptionB,private=PrivateB)
+        b2.title=TitleB
+        b2.description=DescriptionB
+        b2.private=PrivateB
     except :
         b2 = Bookmark(title=TitleB,url=UrlB,description=DescriptionB,private=PrivateB)
     b2.save()

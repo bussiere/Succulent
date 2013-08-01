@@ -1,8 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 class Bookmark(models.Model):
+    user = models.ManyToManyField(User)
     url = models.ForeignKey('Url',null=True, blank=True)
     description = models.ForeignKey('Description',null=True, blank=True)
     image = models.ForeignKey('Image',null=True, blank=True)
@@ -10,7 +12,7 @@ class Bookmark(models.Model):
     title = models.ForeignKey('Title',null=True, blank=True)
     private = models.ForeignKey('Private',null=True, blank=True)
     def __unicode__(self):
-        return str(self.url + " " + self.description)
+        return ("%s %s"%(str(self.url),str(self.description)))
     
 
 class Private(models.Model):
@@ -27,7 +29,7 @@ class Title(models.Model):
 class Url(models.Model):
     url = models.CharField(max_length=5024,null=True, blank=True)
     def __unicode__(self):
-        return str(self.Url)
+        return str(self.url)
 
 
 
@@ -47,6 +49,7 @@ class Image(models.Model):
 
     
 class Tag(models.Model):
+    user = models.ManyToManyField(User)
     tag = models.CharField(max_length=1024,null=True, blank=True)
     def __unicode__(self):
         return str(self.tag)
