@@ -35,7 +35,7 @@ def popup(request,count=0):
             title = soup.title.string
         except :
             popup(request,count+1)
-    form = BookmarkForm(initial={'Url': url,'Title':title})
+    form = BookmarkForm(initial={'Url': url,'Title':title,'Tag':tag})
     template = loader.get_template('popup.html')
     context = RequestContext(request, {
         'form': form ,
