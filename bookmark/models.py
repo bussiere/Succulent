@@ -7,9 +7,11 @@ class Bookmark(models.Model):
     description = models.ForeignKey('Description')
     image = models.ForeignKey('Image')
     tag = models.ManyToManyField("Tag")
+    title = models.ForeignKey('Title')
     
     
-    
+class Title(models.Model):
+    title = models.CharField(max_length=5024)    
     
 class Url(models.Model):
     url = models.CharField(max_length=5024)
