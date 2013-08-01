@@ -42,6 +42,8 @@ def popup(request,count=0):
     })
     return HttpResponse(template.render(context))
 
+def tag(request):
+    pass
 
 def close(request):
     template = loader.get_template('close.html')
