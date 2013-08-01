@@ -8,8 +8,12 @@ class Bookmark(models.Model):
     image = models.ForeignKey('Image')
     tag = models.ManyToManyField("Tag")
     title = models.ForeignKey('Title')
+    Private = models.ForeignKey('Private')
     
-    
+
+class Private(models.Model):
+    Private = models.BooleanField(default='False')
+
 class Title(models.Model):
     title = models.CharField(max_length=5024)    
     
