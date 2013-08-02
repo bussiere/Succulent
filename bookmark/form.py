@@ -6,3 +6,10 @@ class BookmarkForm(forms.Form):
     Url = forms.CharField(max_length=5024,required=False,widget=forms.TextInput(attrs={'size':'55'}))
     Tag =  forms.CharField(max_length=5024,required=False,widget=forms.TextInput(attrs={'size':'55'}))
     Private = forms.BooleanField(required=False)
+
+
+class LoginForm(forms.Form):
+    Name = forms.CharField(max_length=1024,required=False,widget=forms.TextInput(attrs={'size':'55'}))
+    Password = forms.CharField(widget=forms.PasswordInput(),required=False)
+    Origin = forms.CharField(max_length=15,required=False,widget=forms.HiddenInput())
+    Url = forms.CharField(max_length=5024,required=False,widget=forms.HiddenInput())

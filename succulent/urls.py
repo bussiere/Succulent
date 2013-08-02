@@ -20,6 +20,7 @@ urlpatterns = patterns('',
      url(r'^admin/', include(admin.site.urls)),
      url(r'^$', views.index, name='index'),
      url(r'^popup/', views.popup, name='popup'),
+     url(r'^login/', views.loginu, name='loginu'),
      url(r'^close/', views.close, name='close'),
 )
 

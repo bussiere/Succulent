@@ -3,8 +3,14 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    origin = models.CharField(max_length=15,null=True, blank=True)
+    url = models.CharField(max_length=5024,null=True, blank=True)
+
 class Bookmark(models.Model):
     user = models.ManyToManyField(User)
+    Date =  models.DateTimeField(auto_now_add=True, blank=True)
     url = models.ForeignKey('Url',null=True, blank=True)
     description = models.ForeignKey('Description',null=True, blank=True)
     image = models.ForeignKey('Image',null=True, blank=True)
@@ -22,12 +28,14 @@ class Private(models.Model):
 
 class Title(models.Model):
     title = models.CharField(max_length=5024,null=True, blank=True)
+    Date =  models.DateTimeField(auto_now_add=True, blank=True)
     def __unicode__(self):
         return str(self.title)
     
     
 class Url(models.Model):
     url = models.CharField(max_length=5024,null=True, blank=True)
+    Date =  models.DateTimeField(auto_now_add=True, blank=True)
     def __unicode__(self):
         return str(self.url)
 
@@ -36,6 +44,7 @@ class Url(models.Model):
 
 class Description(models.Model):
     description = models.CharField(max_length=1024,null=True, blank=True)
+    Date =  models.DateTimeField(auto_now_add=True, blank=True)
     def __unicode__(self):
         return str(self.description)
 
@@ -44,12 +53,14 @@ class Description(models.Model):
     
 class Image(models.Model):
     image = models.ImageField(upload_to="image",null=True, blank=True)
+    Date =  models.DateTimeField(auto_now_add=True, blank=True)
     def __unicode__(self):
         return str(self.image)
 
     
 class Tag(models.Model):
     user = models.ManyToManyField(User)
+    Date =  models.DateTimeField(auto_now_add=True, blank=True)
     tag = models.CharField(max_length=1024,null=True, blank=True)
     def __unicode__(self):
         return str(self.tag)

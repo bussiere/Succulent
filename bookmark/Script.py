@@ -1,6 +1,6 @@
 from models import Bookmark,Url,Title,Description,Tag,Private
 
-def savebookmark(TitleF,UrlF,DescriptionF,TagF,PrivateF):
+def savebookmark(TitleF,UrlF,DescriptionF,TagF,PrivateF,UserF):
 
     try :
         UrlB = Url.objects.get(url=UrlF)
@@ -30,6 +30,8 @@ def savebookmark(TitleF,UrlF,DescriptionF,TagF,PrivateF):
         b2.private=PrivateB
     except :
         b2 = Bookmark(title=TitleB,url=UrlB,description=DescriptionB,private=PrivateB)
+        b2.save()
+        b2.user.add(UserF)
     b2.save()
 
     tags = TagF.split(" ")
@@ -38,19 +40,20 @@ def savebookmark(TitleF,UrlF,DescriptionF,TagF,PrivateF):
             TagB = Tag.objects.get(tag=t)
         except :
             TagB= Tag(tag=t)
+            TagB.save()
+            TagB.user.add(UserF)
         TagB.save()
         b2.tag.add(TagB)
     b2.save()
         
 
-def getbookmark(Url):
+def getbookmark(Url,user):
     tag = ""
     q = Bookmark.objects.filter(url__url__contains=Url)
     if q :
-        print "q"
-        print q
         tags = q[0].tag.all()
         for t in tags :
+            if t.
             tag += t.tag + " "
         tag =  tag[0:-1]
     return tag
