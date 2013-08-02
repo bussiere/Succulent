@@ -1,13 +1,17 @@
 <a href="javascript:(function(){window.open('http://127.0.0.1:8000/popup/?url='+encodeURIComponent(document.URL),'TimeTableTimer','status=no,directories=no,location=no,resizable=no,menubar=no,width=450,height=350,toolbar=no')})()">link</a><br>
 {% autoescape on %}
 {% for b in bookmarks %}
+<a href="{{ b.url.url }}" target="_blank">{{ b.url.url }}</a><br>
 {{ b.title.title }}<br>
-{{ b.url.url }}<br>
-{% if not b.description == "" %}
+{% if not b.description.description == "" %}
 {{ b.description.description }}<br>
 {% endif %}
 {% for t in b.tag.all %}
-{{ t }}
+<a href="../../tag/{{ t.tag }}">{{ t.tag }}</a>
 {% endfor %}<br><br>
+{% endfor %}
+
+{% for t in tags %}
+<a href="../../tag/{{ t }}">{{ t }}</a><br>
 {% endfor %}
 {% endautoescape %}

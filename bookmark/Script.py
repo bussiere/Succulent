@@ -70,5 +70,4 @@ def MiseEnPage(bookmarks):
             if t not in tags :
                 tags.append(t.tag)
     tags.sort()
-    print tags
     return [bookmarks[:5],tags]
