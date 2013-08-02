@@ -1,1 +1,13 @@
-<a href="javascript:(function(){window.open('http://127.0.0.1:8000/popup/?url='+encodeURIComponent(document.URL),'TimeTableTimer','status=no,directories=no,location=no,resizable=no,menubar=no,width=450,height=350,toolbar=no')})()">link</a>
+<a href="javascript:(function(){window.open('http://127.0.0.1:8000/popup/?url='+encodeURIComponent(document.URL),'TimeTableTimer','status=no,directories=no,location=no,resizable=no,menubar=no,width=450,height=350,toolbar=no')})()">link</a><br>
+{% autoescape on %}
+{% for b in bookmarks %}
+{{ b.title.title }}<br>
+{{ b.url.url }}<br>
+{% if not b.description == "" %}
+{{ b.description.description }}<br>
+{% endif %}
+{% for t in b.tag.all %}
+{{ t }}
+{% endfor %}<br><br>
+{% endfor %}
+{% endautoescape %}

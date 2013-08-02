@@ -19,6 +19,8 @@ class Bookmark(models.Model):
     private = models.ForeignKey('Private',null=True, blank=True)
     def __unicode__(self):
         return ("%s %s"%(str(self.url),str(self.description)))
+    class Meta:
+        ordering = ['Date']
     
 
 class Private(models.Model):
@@ -64,3 +66,5 @@ class Tag(models.Model):
     tag = models.CharField(max_length=1024,null=True, blank=True)
     def __unicode__(self):
         return str(self.tag)
+    class Meta:
+        ordering = ['tag']

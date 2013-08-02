@@ -1,7 +1,11 @@
+# -*- coding: utf-8 -*-
 from models import Bookmark,Url,Title,Description,Tag,Private
 
 def savebookmark(TitleF,UrlF,DescriptionF,TagF,PrivateF,UserF):
-
+    TitleF = unicode(TitleF)
+    UrlF = unicode(UrlF)
+    DescriptionF = unicode(DescriptionF)
+    Tagf = unicode(TagF)
     try :
         UrlB = Url.objects.get(url=UrlF)
     except :
@@ -35,6 +39,7 @@ def savebookmark(TitleF,UrlF,DescriptionF,TagF,PrivateF,UserF):
     b2.save()
 
     tags = TagF.split(" ")
+    tags.sort()
     for t in tags :
         try :
             TagB = Tag.objects.get(tag=t)
@@ -59,4 +64,11 @@ def getbookmark(Url,userp):
     return tag
 
 def MiseEnPage(bookmarks):
-    return [0,1]
+    tags = []
+    for b in bookmarks :
+        for t in b.tag.all() :
+            if t not in tags :
+                tags.append(t.tag)
+    tags.sort()
+    print tags
+    return [bookmarks[:5],tags]

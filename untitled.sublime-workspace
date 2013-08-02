@@ -1,0 +1,274 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "bookmark/views.py",
+			"settings":
+			{
+				"buffer_size": 3461,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bookmark/form.py",
+			"settings":
+			{
+				"buffer_size": 1023,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "from models import Bookmark,Url,Title,Description,Tag,Private\n\ndef savebookmark(TitleF,UrlF,DescriptionF,TagF,PrivateF,UserF):\n\n    try :\n        UrlB = Url.objects.get(url=UrlF)\n    except :\n        UrlB = Url(url=UrlF)\n    UrlB.save()\n\n    try :\n        TitleB = Title.objects.get(title=TitleF)\n    except :\n        TitleB = Title(title=TitleF)\n    TitleB.save();\n    try :\n        DescriptionB = Description.objects.get(description=DescriptionF)\n    except :\n        DescriptionB = Description(description=DescriptionF)\n    DescriptionB.save()\n    try :\n        PrivateB = Private.objects.get(private= (PrivateF == 'True'))\n    except :\n        PrivateB = Private(private= (PrivateF == 'True'))\n    PrivateB.save()\n    try :\n        b2 = Bookmark.objects.get(url=UrlB)\n        b2.title=TitleB\n        b2.description=DescriptionB\n        b2.private=PrivateB\n    except :\n        b2 = Bookmark(title=TitleB,url=UrlB,description=DescriptionB,private=PrivateB)\n        b2.save()\n        b2.user.add(UserF)\n    b2.save()\n\n    tags = TagF.split(\" \")\n    for t in tags :\n        try :\n            TagB = Tag.objects.get(tag=t)\n        except :\n            TagB= Tag(tag=t)\n            TagB.save()\n            TagB.user.add(UserF)\n        TagB.save()\n        b2.tag.add(TagB)\n    b2.save()\n        \n\ndef getbookmark(Url,userp):\n    tag = \"\"\n    q = Bookmark.objects.filter(url__url__contains=Url)\n    if q :\n        tags = q[0].tag.all()\n        tags = tags.filter(user = userp)\n        for t in tags :\n                tag += t.tag + \" \"\n        tag =  tag[0:-1]\n    return tag\n\ndef MiseEnPage(bookmarks):\n    for b in bookmarks :\n        for t in b.tagsz\n    return [0,1]",
+			"file": "bookmark/Script.py",
+			"file_size": 1660,
+			"file_write_time": 1375480263000000,
+			"settings":
+			{
+				"buffer_size": 1667,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 146.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/bussiere/workspace/Satsuki/settings.py",
+		"/home/bussiere/workspace/Satsuki/contact/admin.py",
+		"/home/bussiere/tempo/generatesite.py",
+		"/home/bussiere/tempo/1.html",
+		"/home/bussiere/tempo/index.html",
+		"/home/bussiere/workspace/Documentation/extra/raccourcisubuntu.md",
+		"/home/bussiere/workspace/Documentation/extra/wifiscanning.md",
+		"/home/bussiere/.bashrc",
+		"/home/bussiere/workspace/Blog/extra/README.md",
+		"/home/bussiere/workspace/DernierBar/ConferenceGits/Presentation/extra/publishconf.py",
+		"/home/bussiere/workspace/DernierBar/ConferenceGits/Presentation/extra/flingue.md",
+		"/home/bussiere/workspace/DernierBar/ConferenceGits/Presentation/extra/make.py",
+		"/home/bussiere/workspace/DernierBar/ConferenceGits/Presentation/extra/glass.md",
+		"/home/bussiere/workspace/DernierBar/ConferenceGits/Presentation/extra/pelicanconf.py",
+		"/home/bussiere/workspace/DernierBar/ConferenceGits/Presentation/extra/README.md",
+		"/home/bussiere/workspace/DernierBar/ConferenceGits/Presentation/extra/develop_server.sh",
+		"/home/bussiere/workspace/DernierBar/ConferenceGits/Presentation/extra/django_query.md",
+		"/home/bussiere/workspace/DernierBar/ConferenceGits/Presentation/extra/generateur.py",
+		"/home/bussiere/workspace/DernierBar/ConferenceGits/Presentation/extra/git.md",
+		"/home/bussiere/workspace/DernierBar/ConferenceGits/Presentation/extra/make.bat",
+		"/home/bussiere/workspace/DernierBar/ConferenceGits/Presentation/extra/pelicanconf.pyc",
+		"/home/bussiere/workspace/DernierBar/ConferenceGits/Presentation/extra/url.txt",
+		"/home/bussiere/workspace/DernierBar/ConferenceGits/Presentation/extra/wifiscanning.md",
+		"/home/bussiere/workspace/DernierBar/ConferenceGits/Presentation/extra/zfs.md",
+		"/home/bussiere/workspace/Blog/extra/make.py",
+		"/home/bussiere/workspace/Blog/extra/images/rename.py",
+		"/home/bussiere/workspace/Blog/extra/Day_one.md",
+		"/home/bussiere/workspace/Blog/extra/La_frange.md"
+	],
+	"find":
+	{
+		"height": 0.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "bookmark/views.py",
+					"settings":
+					{
+						"buffer_size": 3461,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1872,
+								1872
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 459.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "bookmark/form.py",
+					"settings":
+					{
+						"buffer_size": 1023,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								928,
+								928
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "bookmark/Script.py",
+					"settings":
+					{
+						"buffer_size": 1667,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1650,
+								1650
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 866.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 112.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}

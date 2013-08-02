@@ -13,3 +13,6 @@ class LoginForm(forms.Form):
     Password = forms.CharField(widget=forms.PasswordInput(),required=False)
     Origin = forms.CharField(max_length=15,required=False,widget=forms.HiddenInput())
     Url = forms.CharField(max_length=5024,required=False,widget=forms.HiddenInput())
+
+class SearchForm(forms.Form):
+	Search = forms.CharField(max_length=1024,required=False,widget=forms.TextInput(attrs={'size':'55'}))

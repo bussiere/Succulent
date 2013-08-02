@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django.http import HttpResponse,HttpResponseRedirect,HttpRequest
 from django.template import RequestContext, loader
 from bookmark.form import BookmarkForm, LoginForm
@@ -45,10 +47,10 @@ def index(request):
         bookmarks = retour[0]
         tags = retour[1]
         template = loader.get_template('index.html')
-        context = RequestContext(request,{})
-        return HttpResponse(template.render(context))
+        context = RequestContext(request,{'bookmarks':bookmarks,'tags':tags})
+        return HttpResponse(template.render(context).encode('utf8'))
     else :
-        loginu(request,"origin")
+        return  loginu(request,"main")
 
 
 def popup(request,count=0,url=None,origin=None):
