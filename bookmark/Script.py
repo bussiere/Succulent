@@ -57,3 +57,6 @@ def getbookmark(Url,userp):
                 tag += t.tag + " "
         tag =  tag[0:-1]
     return tag
+
+def MiseEnPage(bookmarks):
+    return [0,1]

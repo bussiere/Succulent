@@ -3,11 +3,11 @@ from django.template import RequestContext, loader
 from bookmark.form import BookmarkForm, LoginForm
 import urllib2
 from BeautifulSoup import BeautifulSoup
-from Script import savebookmark, getbookmark
+from Script import savebookmark, getbookmark,MiseEnPage
 from django.utils.http import urlencode
 from django.contrib.auth import authenticate, login
 from Render import RenderLogin
-
+from models import Bookmark,Tag
 
 
 
@@ -40,6 +40,10 @@ def loginu(request,origin=None,url=None):
 
 def index(request):
     if request.user.is_authenticated():
+        bookmarks = Bookmark.objects.filter(user = request.user)
+        retour  = MiseEnPage(bookmarks)
+        bookmarks = retour[0]
+        tags = retour[1]
         template = loader.get_template('index.html')
         context = RequestContext(request,{})
         return HttpResponse(template.render(context))
