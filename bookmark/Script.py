@@ -47,13 +47,13 @@ def savebookmark(TitleF,UrlF,DescriptionF,TagF,PrivateF,UserF):
     b2.save()
         
 
-def getbookmark(Url,user):
+def getbookmark(Url,userp):
     tag = ""
     q = Bookmark.objects.filter(url__url__contains=Url)
     if q :
         tags = q[0].tag.all()
+        tags = tags.filter(user = userp)
         for t in tags :
-            if t.
-            tag += t.tag + " "
+                tag += t.tag + " "
         tag =  tag[0:-1]
     return tag
