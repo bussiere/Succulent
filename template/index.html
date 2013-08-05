@@ -1,7 +1,7 @@
 <a href="javascript:(function(){window.open('http://127.0.0.1:8000/popup/?url='+encodeURIComponent(document.URL),'TimeTableTimer','status=no,directories=no,location=no,resizable=no,menubar=no,width=450,height=350,toolbar=no')})()">link</a><br>
 {% autoescape on %}
 Search :
-<form action="../tag/" method="post">{% csrf_token %}
+<form action="../../../tag/" method="post">{% csrf_token %}{% csrf_token %}
 {{ form.as_p }}
 <input type="submit" value="Submit" />
 </form>
