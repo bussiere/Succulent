@@ -12,11 +12,11 @@ Search :
 {{ b.description.description }}<br>
 {% endif %}
 {% for t in b.tag.all %}
-<a href="../../tag/{{ t.tag }}/{{ id }}/">{{ t.tag }}</a>
+<a href="../../tag/{{ t.tag }}/">{{ t.tag }}</a>
 {% endfor %}<br><br>
 {% endfor %}
 
 {% for t in tags %}
-<a href="../../tag/{{ t }}/{{ id }}/">{{ t }}</a><br>
+<a href="../../tag/{{ t }}/">{{ t }}</a><br>
 {% endfor %}
 {% endautoescape %}

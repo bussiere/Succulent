@@ -66,7 +66,7 @@ class Tag(models.Model):
     tag = models.CharField(max_length=1024,null=True, blank=True)
     def save(self):
         self.tag = self.tag.replace("+","")
-        self.save()
+        super(Tag, self).save()
     def __unicode__(self):
         return str(self.tag)
     class Meta:

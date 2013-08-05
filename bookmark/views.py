@@ -94,24 +94,30 @@ def tag(request,tag=None,user=None):
             form = SearchForm(request.POST)
             if form.is_valid():
                 tag = form.cleaned_data['Search']
+                old = tag.replace(" ","+")
                 tags = tag.split(" ")
         else :
+            old = tag
             tags = tag.split("+")
         tagso = []
         for t in tags :
-            tagso = tagso + Tag.objects.filter(tag = t)
+           tagsresult = Tag.objects.filter(tag = t)
+           for tg in tagsresult :
+               tagso.append(tg)
+               
         tags = None    
         if user and int(user) == int(request.user.id) :  
-            bookmarks = Bookmark.objects.filter(user = request.user,tag = tagso)
+            bookmarks = Bookmark.objects.filter(user = request.user,tag__in = tagso)
             retour  = MiseEnPage(bookmarks)
             bookmarks = retour[0]
             tags = retour[1]
             template = loader.get_template('tag.html')
             form = SearchForm()
-            context = RequestContext(request,{'bookmarks':bookmarks,'tags':tags,'form':form,'id':request.user.id})
+            
+            context = RequestContext(request,{'bookmarks':bookmarks,'tags':tags,'form':form,'id':request.user.id,'old':old})
             return HttpResponse(template.render(context).encode('utf8'))
         else :
-            bookmarks = Bookmark.objects.filter(tag = tagso,private = False)
+            bookmarks = Bookmark.objects.filter(tag__in = tagso,private = False)
             retour  = MiseEnPage(bookmarks)
             bookmarks = retour[0]
             tags = retour[1]

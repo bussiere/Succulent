@@ -67,7 +67,7 @@ def MiseEnPage(bookmarks):
     tags = []
     for b in bookmarks :
         for t in b.tag.all() :
-            if t not in tags :
+            if t.tag not in tags :
                 tags.append(t.tag)
     tags.sort()
     return [bookmarks[:5],tags]

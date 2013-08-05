@@ -12,11 +12,14 @@ Search :
 {{ b.description.description }}<br>
 {% endif %}
 {% for t in b.tag.all %}
-<a href="../../tag/{{ t.tag }}/">{{ t.tag }}</a>
+<a href="../../../tag/{{ t.tag }}/{{ id }}/">{{ t.tag }}</a>
 {% endfor %}<br><br>
 {% endfor %}
 
 {% for t in tags %}
-<a href="../../tag/{{ t }}/">{{ t }}</a><br>
+{% if old % }
+<a href="../../../tag/{{ t }}+{{ old }}/{{ id }}/">+</a>
+{% endif %}
+<a href="../../../tag/{{ t }}/{{ id }}/">{{ t }}</a><br>
 {% endfor %}
 {% endautoescape %}
