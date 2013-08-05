@@ -64,6 +64,9 @@ class Tag(models.Model):
     user = models.ManyToManyField(User)
     Date =  models.DateTimeField(auto_now_add=True, blank=True)
     tag = models.CharField(max_length=1024,null=True, blank=True)
+    def save(self):
+        self.tag = self.tag.replace("+","")
+        self.save()
     def __unicode__(self):
         return str(self.tag)
     class Meta:

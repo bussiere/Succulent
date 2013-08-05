@@ -48,7 +48,7 @@ def index(request):
         tags = retour[1]
         template = loader.get_template('index.html')
         form = SearchForm()
-        context = RequestContext(request,{'bookmarks':bookmarks,'tags':tags,'form':form})
+        context = RequestContext(request,{'bookmarks':bookmarks,'tags':tags,'form':form,'id':request.user.id})
         return HttpResponse(template.render(context).encode('utf8'))
     else :
         return  loginu(request,"main")
@@ -87,16 +87,39 @@ def popup(request,count=0,url=None,origin=None):
     else :
         return loginu(request,"popup",url)
 
-def tag(request):
+def tag(request,tag=None,user=None):
     if request.user.is_authenticated():
-        bookmarks = Bookmark.objects.filter(user = request.user)
-        retour  = MiseEnPage(bookmarks)
-        bookmarks = retour[0]
-        tags = retour[1]
-        template = loader.get_template('tag.html')
-        form = SearchForm()
-        context = RequestContext(request,{'bookmarks':bookmarks,'tags':tags,'form':form})
-        return HttpResponse(template.render(context).encode('utf8'))
+        print int(request.user.id)
+        if request.method == 'POST' :
+            form = SearchForm(request.POST)
+            if form.is_valid():
+                tag = form.cleaned_data['Search']
+                tags = tag.split(" ")
+        else :
+            tags = tag.split("+")
+        tagso = []
+        for t in tags :
+            tagso = tagso + Tag.objects.filter(tag = t)
+        tags = None    
+        if user and int(user) == int(request.user.id) :  
+            bookmarks = Bookmark.objects.filter(user = request.user,tag = tagso)
+            retour  = MiseEnPage(bookmarks)
+            bookmarks = retour[0]
+            tags = retour[1]
+            template = loader.get_template('tag.html')
+            form = SearchForm()
+            context = RequestContext(request,{'bookmarks':bookmarks,'tags':tags,'form':form,'id':request.user.id})
+            return HttpResponse(template.render(context).encode('utf8'))
+        else :
+            bookmarks = Bookmark.objects.filter(tag = tagso,private = False)
+            retour  = MiseEnPage(bookmarks)
+            bookmarks = retour[0]
+            tags = retour[1]
+            template = loader.get_template('taga.html')
+            form = SearchForm()
+            context = RequestContext(request,{'bookmarks':bookmarks,'tags':tags,'form':form})
+            return HttpResponse(template.render(context).encode('utf8'))
+            
     else :
         return  loginu(request,"main")
 
