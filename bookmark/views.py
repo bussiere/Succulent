@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.http import HttpResponse,HttpResponseRedirect,HttpRequest
 from django.template import RequestContext, loader
-from bookmark.form import BookmarkForm, LoginForm
+from bookmark.form import BookmarkForm, LoginForm,SearchForm
 import urllib2
 from BeautifulSoup import BeautifulSoup
 from Script import savebookmark, getbookmark,MiseEnPage
@@ -47,7 +47,8 @@ def index(request):
         bookmarks = retour[0]
         tags = retour[1]
         template = loader.get_template('index.html')
-        context = RequestContext(request,{'bookmarks':bookmarks,'tags':tags})
+        form = SearchForm()
+        context = RequestContext(request,{'bookmarks':bookmarks,'tags':tags,'form':form})
         return HttpResponse(template.render(context).encode('utf8'))
     else :
         return  loginu(request,"main")
@@ -87,7 +88,18 @@ def popup(request,count=0,url=None,origin=None):
         return loginu(request,"popup",url)
 
 def tag(request):
-    pass
+    if request.user.is_authenticated():
+        bookmarks = Bookmark.objects.filter(user = request.user)
+        retour  = MiseEnPage(bookmarks)
+        bookmarks = retour[0]
+        tags = retour[1]
+        template = loader.get_template('tag.html')
+        form = SearchForm()
+        context = RequestContext(request,{'bookmarks':bookmarks,'tags':tags,'form':form})
+        return HttpResponse(template.render(context).encode('utf8'))
+    else :
+        return  loginu(request,"main")
+
 
 def close(request):
     template = loader.get_template('close.html')
